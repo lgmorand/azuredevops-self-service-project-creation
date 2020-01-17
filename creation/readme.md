@@ -4,27 +4,27 @@ As a second step, we need now to prepare the release (or releases), responsible 
 
 ## Create a release
 
-Once again, we are going to leverage Azure DevOps. So, in the "global" or "governance" project, create a (release) pipeline (/!\ not a build one. Not that it change anything but since it create something, I consider it a release, more than a build)
+Once again, we are going to leverage Azure DevOps. So, in the "global" or "governance" project, create a (release) pipeline (/!\ not a build one. Not that it changes anything but since it creates something, I consider it a release, more than a build)
 
 ![Create release](./media/creating%201.png)
 
-Then in the *variables* tab, add some variables like a the name of the project and its type.
+Then in the *variables* tab, add some variables like the name of the project and its type.
 
 > Don't forget to scroll to the right and check the variable to be settable at release creation
 
 ![Add variables](./media/creating%202.png)
 
-You now have to add one powershell task in which we call call [Azure DevOps CLI](https://docs.microsoft.com/en-us/azure/devops/cli/?view=azure-devops) commands
+You now have to add one PowerShell task in which we call [Azure DevOps CLI](https://docs.microsoft.com/en-us/azure/devops/cli/?view=azure-devops) commands
 
 ### Prepare the CLI
 
-First we need to be sure that CLI is here (it should be present by default on Hosted Agents) and then, we need to ensure the azure-devops extension is also present (which should also be the base by default)
+First, we need to be sure that CLI is here (it should be present by default on Hosted Agents) and then, we need to ensure the azure-devops extension is also present (which should also be the base by default)
 
 ```powershell
 az extension add --name azure-devops
 ```
 
-Then we need to authenticate agains our organization. For that you have to create a PAT token, and add the value in the variables of your pipeline and click on the small lock, to make it a secret (secure). You can also use [Azure Keyvault integration](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml).
+Then we need to authenticate against our organization. For that, you have to create a PAT token, and add the value in the variables of your pipeline and click on the small lock, to make it a secret (secure). You can also use [Azure Keyvault integration](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml).
 
 ```powershell
 # setting up the PAT which will be used by commands
@@ -44,7 +44,7 @@ az devops project create --name $(ProjectName) --org "https://lgmorand.visualstu
 az devops configure --defaults organization=https://lgmorand.visualstudio.com/ project=$(ProjectName)
 ```
 
-Then we want to customize the project, by creating a repo from a repo template (which you have to create yourself, it can be in Azure DevOps!), add some branching strategy, rights access and also create a first pipeline
+Then we want to customize the project, by creating a repo from a repo template (which you have to create yourself, it can be in Azure DevOps!), add some branching strategy, rights access and also create the first pipeline
 
 Here is the full and final script:
 
@@ -95,7 +95,7 @@ When executed you get:
 - a repo is already present
 - best practices for branching strategy are also in place
 
-It's not perfect but that's a pretty good start for a scaffolded project isn't it ?
+It's not perfect but that's a pretty good start for a scaffolded project, isn't it?
 
 ## Next steps
 

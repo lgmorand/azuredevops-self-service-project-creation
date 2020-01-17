@@ -1,14 +1,14 @@
 # Processing tickets
 
-Now that ticketing process is ready and release exist, we just need to plug them together.
+Now that the ticketing process is ready and release exists, we just need to plug them together.
 
-To be transparent, in this example, once the demand to create a new project is created, we'll process it directly. **In a real world, you could have a workflow in order to say that only tickets in a certain state can be processed.** The workflow could be in the workitem process itself (only process tickets with "Accepted" status), could be done in Microsoft Flow, maybe calling external service (like teams, ServiceNow, etc.), or even in the release itself.
+To be transparent, in this example, once the demand to create a new project is created, we'll process it directly. **In a real world, you could have a workflow to say that only tickets in a certain state can be processed.** The workflow could be in the workitem process itself (only process tickets with "Accepted" status), could be done in Microsoft Flow, maybe calling external service (like teams, ServiceNow, etc.), or even in the release itself.
 
 ## Leveraging Microsoft Flow
 
-To my knowledge, there is no way to trigger a script or a pipeline in Azure DevOps **from** the creation or the update of a workitem. You can use webhook to post a message in a Teams/Slack channel but triggering a pipeline is something totally different. Moreover, I'd like to be able to pass dynamic parameters to the build.
+To my knowledge, there is no way to trigger a script or a pipeline in Azure DevOps **from** the creation or the update of a workitem. You can use webhook to post a message in a Teams/Slack channel but triggering a pipeline is something different. Moreover, I'd like to be able to pass dynamic parameters to the build.
 
-My idea is to use [Microsoft Flow](https://flow.microsoft.com) because it's cheap, totally serverless and very quick to set up. It'll take less than 60 secondes to build the workflow I need.
+My idea is to use [Microsoft Flow](https://flow.microsoft.com) because it's cheap, totally serverless and very quick to set up. It'll take less than 60 seconds to build the workflow I need.
 
 ## Building the workflow
 
@@ -24,6 +24,6 @@ Then add a second step with the task **Azure DevOps: trigger a release** and the
 
 ![trigger release](./media/processing%203.png)
 
-That's ALL ! If everything was configured properly, whenever you create a new *Demand* ticket, after few seconds you should see in Microsoft Flow a iteration of your flow and if everything went fine, you should discover a new project in your Azure DevOps organization.
+That's ALL! If everything was configured properly, whenever you create a new *Demand* ticket, after few seconds you should see in Microsoft Flow n iteration of your flow and if everything went fine, you should discover a new project in your Azure DevOps organization.
 
-It's not perfect yet and I listed here some ideas of [improvments](../improvments/readme.md).
+It's not perfect yet and I listed here some ideas of [improvments](../improvements/readme.md).
