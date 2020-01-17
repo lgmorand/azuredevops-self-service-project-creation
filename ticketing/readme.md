@@ -48,4 +48,4 @@ That's all. Whenever someone wants to create a project, he just has to create a 
 
 ## Next steps
 
-It's now time to [process our tickets](../creating/readme.md).
+It's now time to [automate the creation of the project](../creation/readme.md).

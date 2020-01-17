@@ -26,4 +26,4 @@ Then add a second step with the task **Azure DevOps: trigger a release** and the
 
 That's ALL ! If everything was configured properly, whenever you create a new *Demand* ticket, after few seconds you should see in Microsoft Flow a iteration of your flow and if everything went fine, you should discover a new project in your Azure DevOps organization.
 
-It's not perfect yet and I listed here some ideas of improvments.
+It's not perfect yet and I listed here some ideas of [improvments](../creation/readme.md).

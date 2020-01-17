@@ -32,7 +32,7 @@ There are of course different ways of doing it. I could implement a chat bot exp
 
 My solution is:
 
-1. using Azure DevOps as a ticketing system (could be replaced easily by Jira, ServiceNow or anything else with an exposed Rest API)
-2. using Microsoft Flow to monitor and process the tickets and create controls
-3. using Azure DevOps pipeline to drive the project creation
-
+1. using Azure DevOps as a [ticketing system](./ticketing/readme.md) (could be replaced easily by Jira, ServiceNow or anything else with an exposed Rest API)
+2. using Azure DevOps pipeline to drive the [creation of the project](./creation/readme.md)
+3. using Microsoft Flow to [monitor and process the tickets](./processing/readme.md) and create controls
+4. add some [improvments](./improvments/readme.md)
