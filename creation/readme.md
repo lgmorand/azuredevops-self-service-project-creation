@@ -94,7 +94,6 @@ When executed you get:
 - for which the new admin is the creator of the *Demand* ticket
 - a repo is already present
 - best practices for branching strategy are also in place
-- a pipeline is already present and set up
 
 It's not perfect but that's a pretty good start for a scaffolded project isn't it ?
 

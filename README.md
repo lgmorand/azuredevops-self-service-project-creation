@@ -1,8 +1,12 @@
 # Azure DevOps: Automatic creation of a new project
 
+## Presentation
+
+This article explain how you can set up a self-service mecanism to allow people in your org to create a new projet and get this projet being automatically configured from a "templated" one.
+
 ## Context
 
-In large companies, there is often one central team responsible to provide services to the developers, like a software factory platform. When they are using Azure DevOps, they generally create one Azure DevOps organization and then create one project per team or per project.
+In large companies, there is often one central team responsible to provide services to the developers, like a software factory platform. When they are using Azure DevOps, they generally create one Azure DevOps organization and then create one project per team or per project. They are the only one with enough rights to create projects and so, others teams have to go through them everytime they want a new project.
 
 ## Today
 
