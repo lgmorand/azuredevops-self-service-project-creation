@@ -1,8 +1,12 @@
 # Azure DevOps: Automatic creation of a new project
 
+## Presentation
+
+This article explain how you can set up a self-service mecanism to allow people in your org to create a new projet and get this projet being automatically configured from a "templated" one.
+
 ## Context
 
-In large companies, there is often one central team responsible to provide services to the developers, like a software factory platform. When they are using Azure DevOps, they generally create one Azure DevOps organization and then create one project per team or per project.
+In large companies, there is often one central team responsible to provide services to the developers, like a software factory platform. When they are using Azure DevOps, they generally create one Azure DevOps organization and then create one project per team or per project. They are the only one with enough rights to create projects and so, others teams have to go through them everytime they want a new project.
 
 ## Today
 
@@ -32,7 +36,7 @@ There are of course different ways of doing it. I could implement a chat bot exp
 
 My solution is:
 
-1. using Azure DevOps as a ticketing system (could be replaced easily by Jira, ServiceNow or anything else with an exposed Rest API)
-2. using Microsoft Flow to monitor and process the tickets and create controls
-3. using Azure DevOps pipeline to drive the project creation
-
+1. using Azure DevOps as a [ticketing system](./ticketing/readme.md) (could be replaced easily by Jira, ServiceNow or anything else with an exposed Rest API)
+2. using Azure DevOps pipeline to drive the [creation of the project](./creation/readme.md)
+3. using Microsoft Flow to [monitor and process the tickets](./processing/readme.md) and create controls
+4. add some [improvments](./improvments/readme.md)
