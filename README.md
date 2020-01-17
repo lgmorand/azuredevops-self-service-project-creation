@@ -1,8 +1,8 @@
-# Azure DevOps: Automatic creation of a new project
+# Azure DevOps: self-service creation of a new Azure DevOps project
 
 ## Presentation
 
-This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get this projet being automatically configured from a "templated" one.
+This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get ths projet being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc).
 
 ## Context
 
