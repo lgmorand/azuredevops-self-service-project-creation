@@ -2,7 +2,7 @@
 
 ## Presentation
 
-This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get ths projet being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc).
+This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get the project being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc).
 
 ## Context
 
@@ -15,12 +15,12 @@ Dev team --> new demand --> send to AzureDevOps team --> manual creation of the 
 
 There are pros and cons in this very simple process
 
-**pros**
+### pros
 
 - centralized demand
 - possibility of implementing specific controls
 
-**cons**
+### cons
 
 - slow project creation
 - time-consuming for the Azure DevOps teams

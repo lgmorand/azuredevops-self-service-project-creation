@@ -20,7 +20,6 @@ You now have to add one PowerShell task in which we call [Azure DevOps CLI](http
 
 First, we need to be sure that CLI is here (it should be present by default on Hosted Agents) and then, we need to ensure the azure-devops extension is also present (which should also be the base by default)
 
-
 ```powershell
 az extension add --name azure-devops
 ```
@@ -67,9 +66,7 @@ az devops configure --defaults organization=https://lgmorand.visualstudio.com/ p
 
 ### Security ###
 # retrieve the ID of the admin group of the new created project
-$projectAdminGroup = az devops security group list --project test1 --query "graphGroups[?displayName=='Contributors'].descriptor" | Out-String
-
-Write-Host $projectAdminGroup
+$projectAdminGroup = az devops security group list --project test1 --query "graphGroups[?displayName=='Administrattors'].descriptor" | Out-String
 
 # add the creator as the admin of the new created project
 az devops security group membership add --group-id $projectAdminGroup --member-id '$(Creator)'
