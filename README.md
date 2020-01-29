@@ -2,7 +2,7 @@
 
 ## Presentation
 
-This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get the project being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc).
+This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get the project being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc) without writing any line of code.
 
 ## Context
 
