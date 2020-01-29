@@ -7,3 +7,4 @@ This self-service is perfectly working but here some ideas I did not implement h
 - you could have different releases and trigger the right one depending on the type of the desired project by the creator. the IF ELSE control can be done in Microsoft Flow (and thus having several pipelines in AzDO), or in AzDO and having conditional tasks in a single pipeline
 - some actions are not possible through the CLI (yet), you may have to use the API.
 - it's possible to create YAML file in the template repo which can then be used to create a default pipeline in the project. very useful for teams which do not know well Azure DevOps
+- you can add pull requests templates by following this [documentation](https://docs.microsoft.com/en-us/azure/devops/repos/git/pull-request-templates?view=azure-devops)
