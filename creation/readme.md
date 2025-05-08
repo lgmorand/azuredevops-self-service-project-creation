@@ -95,6 +95,63 @@ When executed you get:
 
 It's not perfect but that's a pretty good start for a scaffolded project, isn't it?
 
+## Custom role (optional)
+
+Referential
+
+|Key| Bit flag | Role name dans l'interface|
+|-----|-----|------|
+| GENERIC_READ |1 | View project-level information |
+| GENERIC_WRITE | 2 |Edit project-level information |
+| DELETE | 4| Delete team project |
+| PUBLISH_TEST_RESULTS | 8 | Create test runs|
+| ADMINISTER_BUILD | 16 |Administer a build |
+| START_BUILD | 32|Start a build  |
+| EDIT_BUILD_STATUS | 64|Edit build quality   |
+| UPDATE_BUILD | 128|Write to build operational store|
+| DELETE_TEST_RESULTS | 256|Delete test runs|
+| VIEW_TEST_RESULTS | 512|View test runs|
+| MANAGE_TEST_ENVIRONMENTS | 2048| Manage test environments|
+| MANAGE_TEST_CONFIGURATIONS | 4096| Manage test configurations|
+| WORK_ITEM_DELETE | 8192| Delete and restore work items|
+| WORK_ITEM_MOVE | 16384| Move work items out of this project|
+| WORK_ITEM_PERMANENTLY_DELETE | 32768| Permanently delete work items|
+| RENAME | 65536| Rename team project |
+| MANAGE_PROPERTIES | 131072 | Manage project properties|
+| MANAGE_SYSTEM_PROPERTIES | 262144|Manage system project properties |
+| BYPASS_PROPERTY_CACHE | 524288|Bypass project property cache |
+| BYPASS_RULES | 1048576 | Bypass rules on work item updates |
+| SUPPRESS_NOTIFICATIONS | 2097152 | Suppress notifications for work item updates |
+| UPDATE_VISIBILITY | 4194304| Update project visibility |
+| CHANGE_PROCESS | 8388608 | Change process of team project|
+| AGILETOOLS_BACKLOG | 16777216|Agile backlog management|
+| DELIVERY_PLANS |33554432|Manage delivery plans|
+
+```bash
+az devops security groupe create --name $projectName --description 'blablalba with CPM ID' --project $projectName
+
+# retrieve the ID of the admin group of the new created project
+$projectDescriptor = az devops security group list --project $projectName  --query "graphGroups[?displayName=='$groupName'].descriptor" | ConvertFrom-Json
+$projectId = az devops project show --project $projectName --query "id" | ConvertFrom-Json
+
+# check if the descriptiof is correct
+az devops security group show --id $projectDescriptor
+
+# list permisssions of the group
+$token = '$PROJECT:vstfs:///Classification/TeamProject/'+$projectId
+# namespace-id for project collection (list is documented here: https://learn.microsoft.com/fr-fr/azure/devops/organizations/security/namespace-reference?view=azure-devops)
+az devops security permission list --namespace-id '52d39943-cb85-4d7f-8fa8-c6baac873819' --subject $projectDescriptor --token $token --output table
+
+# add permissions to the group
+# either you can add permission one by one (using merge=true parameter) or you can add all permissions at once (combining big flags)
+az devops security permission update --namespace-id '52d39943-cb85-4d7f-8fa8-c6baac873819' --subject $projectDescriptor --token $token --allow-bit 7  --merge false --output table
+az devops security permission update --namespace-id '52d39943-cb85-4d7f-8fa8-c6baac873819' --subject $projectDescriptor --token $token --deny-bit 16 --merge false --output table
+
+# add member to the group
+az devops security group membership add --group-id $projectDescriptor --member-id 'user@email.com'
+
+```
+
 ## Next steps
 
 It's now time to [process our tickets](../processing/readme.md).
