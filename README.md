@@ -1,8 +1,76 @@
 # Azure DevOps: self-service creation of a new Azure DevOps project
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-0078D7?logo=azure-devops&logoColor=white)](https://azure.microsoft.com/en-us/services/devops/)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 ## Presentation
 
 This article explains how you can set up a self-service mechanism to allow people in your org to create a new project and get the project being automatically configured from a "templated" one (scaffolding of repo, RBAC, pipeline, branching, etc).
+
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           SELF-SERVICE WORKFLOW                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+    ┌──────────────┐          ┌──────────────────────────────────────────────┐
+    │              │          │            AZURE DEVOPS ORGANIZATION          │
+    │  Developer   │          │                                              │
+    │   (User)     │          │  ┌────────────────────────────────────────┐  │
+    │              │          │  │        "Governance" Project            │  │
+    └──────┬───────┘          │  │                                        │  │
+           │                  │  │  ┌──────────────┐   ┌───────────────┐  │  │
+           │ 1. Creates       │  │  │   Demand     │   │    Release    │  │  │
+           │    Ticket        │  │  │  Work Item   │   │   Pipeline    │  │  │
+           │                  │  │  │              │   │               │  │  │
+           ▼                  │  │  │ - Title      │   │ - Create Proj │  │  │
+    ┌──────────────┐          │  │  │ - Type       │   │ - Init Repo   │  │  │
+    │   Azure      │          │  │  │ - Name       │   │ - Set RBAC    │  │  │
+    │   DevOps     │──────────┼──┼─▶│ - Template   │   │ - Policies    │  │  │
+    │   Portal     │          │  │  └──────┬───────┘   └───────▲───────┘  │  │
+    └──────────────┘          │  │         │                   │          │  │
+                              │  └─────────┼───────────────────┼──────────┘  │
+                              │            │                   │             │
+                              └────────────┼───────────────────┼─────────────┘
+                                           │                   │
+                                           │ 2. Triggers       │ 3. Triggers
+                                           ▼                   │    Release
+                              ┌────────────────────────┐       │
+                              │                        │       │
+                              │    Power Automate      │───────┘
+                              │    (Microsoft Flow)    │
+                              │                        │
+                              │  - Monitors tickets    │
+                              │  - Validates request   │
+                              │  - Triggers pipeline   │
+                              │                        │
+                              └────────────────────────┘
+
+                                           │
+                                           │ 4. Creates
+                                           ▼
+                              ┌────────────────────────────────────────────────┐
+                              │              NEW PROJECT CREATED               │
+                              │                                                │
+                              │  ✓ Project initialized                        │
+                              │  ✓ Repository with template code              │
+                              │  ✓ Branch policies configured                 │
+                              │  ✓ Creator added as admin                     │
+                              │  ✓ Default pipeline ready                     │
+                              │                                                │
+                              └────────────────────────────────────────────────┘
+```
+
+### Flow Summary
+
+| Step | Component | Action |
+|------|-----------|--------|
+| 1️⃣ | Developer | Creates a "Demand" work item in the governance project |
+| 2️⃣ | Power Automate | Detects new ticket and validates the request |
+| 3️⃣ | Release Pipeline | Triggered by Power Automate with parameters |
+| 4️⃣ | Azure DevOps CLI | Creates and configures the new project |
 
 ## Context
 
@@ -39,4 +107,4 @@ My solution is:
 1. using Azure DevOps as a [ticketing system](./ticketing/readme.md) (could be replaced easily by Jira, ServiceNow or anything else with an exposed Rest API, or even a mailbox)
 2. using Azure DevOps pipeline to drive the [creation of the project](./creation/readme.md)
 3. using Microsoft Flow to [monitor and process the tickets](./processing/readme.md) and create controls
-4. (optional) to add some [improvments](./improvements/readme.md) on my project template
+4. (optional) to add some [improvements](./improvements/readme.md) on my project template
